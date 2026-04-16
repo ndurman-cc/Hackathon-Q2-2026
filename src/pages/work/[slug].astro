@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { site } from '../../site';
+
+export async function getStaticPaths() {
+	const entries = await getCollection('caseStudies');
+	return entries.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, description, role, timeline, heroImage, links } = entry.data;
+---
+
+<BaseLayout
+	title={`${title} — ${site.name}`}
+	description={description}
+	ogImage={heroImage ?? '/og-default.svg'}
+>
+	<article class="container">
+		<header class="case-hero">
+			<p class="meta">
+				<a href="/work">Work</a>
+				<span aria-hidden="true"> / </span>
+				<span>{title}</span>
+			</p>
+			<h1>{title}</h1>
+			<p class="meta" style="font-size:1.05rem; max-width:55ch">{description}</p>
+			<p class="meta">
+				{role} · {timeline}
+			</p>
+			{
+				links && links.length > 0 && (
+					<p class="meta">
+						{links.map((link, i) => (
+							<span>
+								{i > 0 && <span aria-hidden="true"> · </span>}
+								<a href={link.href} rel="noopener noreferrer">
+									{link.label}
+								</a>
+							</span>
+						))}
+					</p>
+				)
+			}
+			{
+				heroImage && (
+					<img
+						class="case-hero__img"
+						src={heroImage}
+						alt=""
+						width={1200}
+						height={675}
+						loading="eager"
+						decoding="async"
+					/>
+				)
+			}
+		</header>
+
+		<div class="prose">
+			<Content />
+		</div>
+
+		<p style="margin-top: var(--space-2xl)">
+			<a href="/work">← All work</a>
+		</p>
+	</article>
+</BaseLayout>

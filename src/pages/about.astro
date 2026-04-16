@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../site';
+---
+
+<BaseLayout
+	title={`About — ${site.name}`}
+	description={`About ${site.name}: background, approach, and contact.`}
+>
+	<div class="container">
+		<div class="page-intro">
+			<h1>About</h1>
+			<p class="lede" style="margin:0; max-width:50ch">{site.bio}</p>
+		</div>
+
+		<div class="prose">
+			<h2>How I work</h2>
+			<p>
+				I start from evidence—analytics, support themes, and targeted research—then iterate in tight loops with
+				product and engineering. I care about inclusive defaults, clear language, and designs teams can maintain.
+			</p>
+			<p>
+				This portfolio is built with <a href="https://astro.build/">Astro</a> and deployed on GitHub Pages. Swap
+				the placeholder case studies in <code>src/content/caseStudies/</code> with your own narrative and imagery.
+			</p>
+
+			<h2>Contact</h2>
+			<ul>
+				<li>
+					<a href={`mailto:${site.email}`}>{site.email}</a>
+				</li>
+				<li>
+					<a href={site.linkedin} rel="noopener noreferrer">LinkedIn</a>
+				</li>
+			</ul>
+
+			<h2>Resume</h2>
+			<p>
+				Add a PDF at <code>public/resume.pdf</code> to enable the download link below.
+			</p>
+			<p>
+				<a class="btn" href={site.resumeHref}>
+					Download resume (PDF)
+				</a>
+			</p>
+		</div>
+	</div>
+</BaseLayout>

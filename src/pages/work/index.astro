@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../site';
+
+const entries = (await getCollection('caseStudies')).sort(
+	(a, b) => (a.data.order ?? 99) - (b.data.order ?? 99),
+);
+---
+
+<BaseLayout title={`Work — ${site.name}`} description={`Case studies and projects by ${site.name}.`}>
+	<div class="container">
+		<div class="page-intro">
+			<h1>Work</h1>
+			<p class="meta" style="font-size:1.1rem; max-width:50ch">
+				End-to-end UX work: research, interaction design, systems thinking, and shipping with engineering.
+			</p>
+		</div>
+
+		<div class="card-grid">
+			{
+				entries.map((entry) => (
+					<a class="card" href={`/work/${entry.id}`}>
+						<h2>{entry.data.title}</h2>
+						<p>{entry.data.description}</p>
+						<p class="meta">
+							{entry.data.role} · {entry.data.timeline}
+						</p>
+						{entry.data.tags && entry.data.tags.length > 0 && (
+							<p class="meta">{entry.data.tags.join(' · ')}</p>
+						)}
+					</a>
+				))
+			}
+		</div>
+	</div>
+</BaseLayout>

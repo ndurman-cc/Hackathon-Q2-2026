@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../site';
+
+const all = await getCollection('caseStudies');
+const featured = all
+	.filter((e) => e.data.featured)
+	.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const cards =
+	featured.length > 0
+		? featured
+		: [...all].sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)).slice(0, 4);
+---
+
+<BaseLayout title={`${site.name} — UX portfolio`} description={site.tagline}>
+	<section class="hero container">
+		<h1>{site.name}</h1>
+		<p class="lede">{site.tagline}</p>
+		<a class="btn" href="/work">View work</a>
+	</section>
+
+	<section class="container" aria-labelledby="featured-heading">
+		<h2 id="featured-heading" class="section-title">Selected work</h2>
+		<div class="card-grid">
+			{
+				cards.map((entry) => (
+					<a class="card" href={`/work/${entry.id}`}>
+						<h2>{entry.data.title}</h2>
+						<p>{entry.data.description}</p>
+						<p class="meta">
+							{entry.data.role} · {entry.data.timeline}
+						</p>
+					</a>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="container">
+		<h2 class="section-title">Let’s talk</h2>
+		<p class="prose" style="margin-top:0">
+			Interested in collaborating? Reach out at{' '}
+			<a href={`mailto:${site.email}`}>{site.email}</a> or connect on{' '}
+			<a href={site.linkedin} rel="noopener noreferrer">LinkedIn</a>.
+		</p>
+	</section>
+</BaseLayout>
