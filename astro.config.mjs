@@ -1,9 +1,11 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-// Replace YOUR-USERNAME with your GitHub username for correct canonical URLs and OG tags.
-// https://docs.astro.build/en/reference/configuration-reference/#site
+// `site` = Pages hostname. `base` = repo name path for project sites (`/username.github.io/REPO/`).
+// For a user site at https://USERNAME.github.io/ only, use base: '/' and a repo named USERNAME.github.io.
+// https://docs.astro.build/en/guides/deploy/github/#path-configuration
 export default defineConfig({
-	site: 'https://YOUR-USERNAME.github.io',
+	site: 'https://ndurman-cc.github.io',
+	base: '/Hackathon-Q2-2026/',
 	output: 'static',
 });

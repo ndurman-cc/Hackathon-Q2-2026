@@ -11,13 +11,15 @@ const cards =
 	featured.length > 0
 		? featured
 		: [...all].sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)).slice(0, 4);
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={`${site.name} — UX portfolio`} description={site.tagline}>
 	<section class="hero container">
 		<h1>{site.name}</h1>
 		<p class="lede">{site.tagline}</p>
-		<a class="btn" href="/work">View work</a>
+		<a class="btn" href={`${base}work`}>View work</a>
 	</section>
 
 	<section class="container" aria-labelledby="featured-heading">
@@ -25,7 +27,7 @@ const cards =
 		<div class="card-grid">
 			{
 				cards.map((entry) => (
-					<a class="card" href={`/work/${entry.id}`}>
+					<a class="card" href={`${base}work/${entry.id}`}>
 						<h2>{entry.data.title}</h2>
 						<p>{entry.data.description}</p>
 						<p class="meta">

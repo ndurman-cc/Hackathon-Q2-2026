@@ -6,6 +6,8 @@ import { site } from '../../site';
 const entries = (await getCollection('caseStudies')).sort(
 	(a, b) => (a.data.order ?? 99) - (b.data.order ?? 99),
 );
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title={`Work — ${site.name}`} description={`Case studies and projects by ${site.name}.`}>
@@ -20,7 +22,7 @@ const entries = (await getCollection('caseStudies')).sort(
 		<div class="card-grid">
 			{
 				entries.map((entry) => (
-					<a class="card" href={`/work/${entry.id}`}>
+					<a class="card" href={`${base}work/${entry.id}`}>
 						<h2>{entry.data.title}</h2>
 						<p>{entry.data.description}</p>
 						<p class="meta">
