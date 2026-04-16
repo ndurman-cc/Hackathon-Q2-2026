@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Case study placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8e3dc"/>
+      <stop offset="100%" stop-color="#faf8f5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#g)"/>
+  <rect x="100" y="100" width="1000" height="475" rx="16" fill="#ffffff" stroke="#e8e3dc" stroke-width="2"/>
+  <text x="600" y="360" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28" fill="#5c5650">Replace with project imagery</text>
+</svg>

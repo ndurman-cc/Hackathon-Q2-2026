@@ -1,0 +1,13 @@
+---
+import { site } from '../site';
+---
+
+<footer class="site-footer">
+	<div class="site-footer__inner">
+		<p class="meta" style="margin:0">© {new Date().getFullYear()} {site.name}</p>
+		<div class="stack" style="gap:var(--space-sm); flex-direction:row; flex-wrap:wrap">
+			<a href={`mailto:${site.email}`}>Email</a>
+			<a href={site.linkedin} rel="noopener noreferrer">LinkedIn</a>
+		</div>
+	</div>
+</footer>
